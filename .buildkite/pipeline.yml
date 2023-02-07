@@ -1,0 +1,11 @@
+steps:
+  - label: ":hammer: Hello World"
+    command: echo "Hello World!"
+
+  - wait
+  
+  - label: ":hammer: Terraform Deploy"
+    commands:
+    - echo "run terraform to deploy to burner account"
+    - cd config/dev
+    - terragrunt run-all apply -auto-approve --terragrunt-non-interactive
