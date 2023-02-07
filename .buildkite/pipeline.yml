@@ -3,10 +3,10 @@ steps:
     commands:
     - pwd
     - mkdir -p ./tools
-    - wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
-    - unzip -o terraform_"$TERRAFORM_VERSION"_linux_amd64.zip -d ./tools
+    - wget https://releases.hashicorp.com/terraform/"$$TERRAFORM_VERSION"/terraform_"$$TERRAFORM_VERSION"_linux_amd64.zip
+    - unzip -o terraform_"$$TERRAFORM_VERSION"_linux_amd64.zip -d ./tools
     - chmod u+x ./tools/terraform
-    - wget https://github.com/gruntwork-io/terragrunt/releases/download/v$TERRAGRUNT_VERSION/terragrunt_linux_amd64
+    - wget https://github.com/gruntwork-io/terragrunt/releases/download/v$$TERRAGRUNT_VERSION/terragrunt_linux_amd64
     - mv terragrunt_linux_amd64 ./tools/terragrunt
     - chmod u+x ./tools/terragrunt
     - export PATH=./tools:$PATH
