@@ -10,11 +10,11 @@ TERRAGRUNT_VERSION=0.40.0
 if ! command -v terraform &> /dev/null; then
     wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
     unzip -o terraform_"$TERRAFORM_VERSION"_linux_amd64.zip -d /tmp
-    mv /tmp/terraform /usr/local/bin/
+    sudo mv /tmp/terraform /usr/local/bin/
 fi
 
 if ! command -v terragrunt &> /dev/null; then
     wget https://github.com/gruntwork-io/terragrunt/releases/download/v$TERRAGRUNT_VERSION/terragrunt_linux_amd64
     chmod u+x terragrunt_linux_amd64
-    mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+    sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
 fi
