@@ -9,7 +9,7 @@ steps:
     - wget https://github.com/gruntwork-io/terragrunt/releases/download/v$$TERRAGRUNT_VERSION/terragrunt_linux_amd64
     - mv terragrunt_linux_amd64 ./tools/terragrunt
     - chmod u+x ./tools/terragrunt
-    - export PATH=./tools:$PATH
+    - export PATH=$$(pwd)/tools:$PATH
     - pwd
     - echo "Hello World!"
     - terraform --version
