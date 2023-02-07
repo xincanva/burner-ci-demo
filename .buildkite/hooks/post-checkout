@@ -7,14 +7,13 @@ echo "--- :terraform: Setting up Terragrunt build environment"
 TERRAFORM_VERSION=1.3.4
 TERRAGRUNT_VERSION=0.40.0
 
-if ! command -v terraform &> /dev/null; then
+if [ ! -f ./tools ]; then
+    mkdir -p ./tools
     wget https://releases.hashicorp.com/terraform/"$TERRAFORM_VERSION"/terraform_"$TERRAFORM_VERSION"_linux_amd64.zip
-    unzip -o terraform_"$TERRAFORM_VERSION"_linux_amd64.zip -d /tmp
-    sudo mv /tmp/terraform /usr/local/bin/
-fi
+    unzip -o terraform_"$TERRAFORM_VERSION"_linux_amd64.zip -d ./tools
+    chmod u+x ./tools/terraform
 
-if ! command -v terragrunt &> /dev/null; then
     wget https://github.com/gruntwork-io/terragrunt/releases/download/v$TERRAGRUNT_VERSION/terragrunt_linux_amd64
-    chmod u+x terragrunt_linux_amd64
-    sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+    mv terragrunt_linux_amd64 ./tools/terragrunt
+    chmod u+x ./tools/terragrunt
 fi

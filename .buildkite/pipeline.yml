@@ -1,11 +1,17 @@
 steps:
   - label: ":hammer: Hello World"
-    command: echo "Hello World!"
+    commands:
+    - export PATH=./tools:$PATH
+    - pwd
+    - echo "Hello World!"
+    - terraform --version
+    - terragrunt --version
 
   - wait
-  
+
   - label: ":hammer: Terraform Deploy"
     commands:
+    - export PATH=./tools:$PATH
     - echo "run terraform to deploy to burner account"
     - cd config/dev
     - terragrunt run-all apply -auto-approve --terragrunt-non-interactive
