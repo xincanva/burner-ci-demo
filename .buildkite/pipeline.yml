@@ -27,4 +27,4 @@ steps:
       TERRAGRUNT_VERSION: "0.40.0"
     plugins:
     - aws-assume-role-with-web-identity:
-        role-arn: arn:aws:iam::973606771572:role/buildkite-oidc-OIDCRole-RNNOQGPIPHRP
+        role-arn: arn:aws:iam::431584165344:role/Test-OIDCRole-1UJPCRWGBMI44	
