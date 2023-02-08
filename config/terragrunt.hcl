@@ -4,7 +4,7 @@ locals {
 
   environment_name  = local.environment_vars.locals.environment
   home_region       = local.environment_vars.locals.home_region
-  state_bucket_name = "burner-ci-demo-tf-state-${local.environment_name}"
+  state_bucket_name = "burner-ci-demo-tf-state-${local.environment_name}-973606771572"
 }
 
 remote_state {
