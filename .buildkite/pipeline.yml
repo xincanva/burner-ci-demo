@@ -14,6 +14,25 @@ steps:
     - echo "Hello World!"
     - terraform --version
     - terragrunt --version
+    ##################################################
+    # Assume role using OIDC                      ####
+    ##################################################
+    - echo "--- :buildkite::key::aws: Requesting an OIDC token for AWS from buildkite"
+    - BUILDKITE_OIDC_TOKEN="$$(buildkite-agent oidc request-token --audience sts.amazonaws.com)"
+    - echo "--- :aws: Assuming role using OIDC token"
+    - echo "Role ARN: $${OIDCROLE_ARN}"
+    - RESPONSE="$$(aws sts assume-role-with-web-identity \
+        --role-arn "$${OIDCROLE_ARN}" \
+        --role-session-name "buildkite-job-$${BUILDKITE_JOB_ID}" \
+        --web-identity-token "$${BUILDKITE_OIDC_TOKEN}")"
+    - echo $$RESPONSE
+    - export AWS_ACCESS_KEY_ID="$(jq -r ".Credentials.AccessKeyId" <<< "$${RESPONSE}")"
+    - export AWS_SECRET_ACCESS_KEY="$(jq -r ".Credentials.SecretAccessKey" <<< "$${RESPONSE}")"
+    - export AWS_SESSION_TOKEN="$(jq -r ".Credentials.SessionToken" <<< "$${RESPONSE}")"
+    - echo "Assumed role: $$(jq -r .AssumedRoleUser.AssumedRoleId <<< "$${RESPONSE}")"
+    ##################################################
+    # Run Terragrunt                              ####
+    ##################################################
     - echo "run terraform to deploy to burner account"
     - aws --version
     - aws sts get-caller-identity
@@ -22,3 +41,4 @@ steps:
     env:
       TERRAFORM_VERSION: "1.3.4"
       TERRAGRUNT_VERSION: "0.40.0"
+      OIDCROLE_ARN: "arn:aws:iam::025967442169:role/BuildkiteOIDC"
