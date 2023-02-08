@@ -15,13 +15,9 @@ steps:
     - terraform --version
     - terragrunt --version
     ##################################################
-    # Assume role using OIDC                      ####
-    ##################################################
-    - aws sts get-caller-identity
-    ##################################################
     # Run Terragrunt                              ####
     ##################################################
-    - echo "run terraform to deploy to burner account"
+    - echo "--- run terraform to deploy to burner account"
     - aws --version
     - aws sts get-caller-identity
     - cd config/dev
