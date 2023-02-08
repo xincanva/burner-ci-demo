@@ -19,10 +19,10 @@ steps:
     ##################################################
     - echo "--- Requesting an OIDC token for AWS from buildkite"
     - BUILDKITE_OIDC_TOKEN="$$(buildkite-agent oidc request-token --audience sts.amazonaws.com)"
+    - echo "OIDC token generated: $$BUILDKITE_OIDC_TOKEN"
     - echo "--- Assuming role using OIDC token"
-    - echo "Role ARN: $${OIDCROLE_ARN}"
-    - RESPONSE="$$(aws sts assume-role-with-web-identity \
-        --role-arn "$${OIDCROLE_ARN}" \
+    - echo "Role ARN: $$OIDCROLE_ARN"
+    - RESPONSE="$$(aws sts assume-role-with-web-identity --role-arn "$${OIDCROLE_ARN}" \
         --role-session-name "buildkite-job-$${BUILDKITE_JOB_ID}" \
         --web-identity-token "$${BUILDKITE_OIDC_TOKEN}")"
     - echo $$RESPONSE
