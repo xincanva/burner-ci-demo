@@ -15,7 +15,7 @@ steps:
     - terraform --version
     - terragrunt --version
     ##################################################
-    # Run Terragrunt       1                       ####
+    # Run Terragrunt       2                       ####
     ##################################################
     - echo "--- run terraform to deploy to burner account"
     - aws --version
